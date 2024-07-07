@@ -10,10 +10,12 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Link,
   Drawer,
   IconButton,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
+import logo from "../assets/logo.png";
 
 const drawerWidth = 240;
 const navItems = ["Cart", "Sign in"];
@@ -43,18 +45,20 @@ const Header = () => {
     <>
       <AppBar component="nav" position="static">
         <Toolbar>
-          <Typography
-            variant="h6"
-            component="a"
-            href=""
-            sx={{
-              flexGrow: 1,
-              color: "inherit",
-              textDecoration: "none",
-            }}
+          <Link
+            href="/"
+            sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
           >
-            Proshop
-          </Typography>
+            <Box component="img" sx={{ height: 40 }} alt="Logo" src={logo} />
+            <Typography
+              variant="h6"
+              component="a"
+              href=""
+              sx={{ color: "primary.contrastText", textDecoration: "none" }}
+            >
+              Proshop
+            </Typography>
+          </Link>
           <Stack
             direction="row"
             spacing={2}
