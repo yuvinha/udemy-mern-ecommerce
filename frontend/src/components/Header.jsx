@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -18,7 +19,13 @@ import { Menu } from "@mui/icons-material";
 import logo from "../assets/logo.png";
 
 const drawerWidth = 240;
-const navItems = ["Cart", "Sign in"];
+const navItems = [
+  { display: "Cart", url: "cart" },
+  {
+    display: "Sign in",
+    url: "login",
+  },
+];
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,10 +37,10 @@ const Header = () => {
   const DrawerList = (
     <Box onClick={handleDrawerToggle}>
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={item} />
+        {navItems.map(({ display, url }) => (
+          <ListItem key={url} disablePadding>
+            <ListItemButton component={RouterLink} to={url}>
+              <ListItemText primary={display} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -46,15 +53,16 @@ const Header = () => {
       <AppBar component="nav" position="static">
         <Toolbar>
           <Link
-            href="/"
+            component={RouterLink}
+            to="/"
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
           >
             <Box component="img" sx={{ height: 40 }} alt="Logo" src={logo} />
             <Typography
               variant="h6"
-              component="a"
-              href=""
-              sx={{ color: "primary.contrastText", textDecoration: "none" }}
+              noWrap
+              to="/"
+              sx={{ color: "primary.contrastText" }}
             >
               Proshop
             </Typography>
@@ -66,8 +74,10 @@ const Header = () => {
               display: { xs: "none", sm: "block" },
             }}
           >
-            {navItems.map((item) => (
-              <Button color="inherit">{item}</Button>
+            {navItems.map(({ display, url }) => (
+              <Button component={RouterLink} key={url} color="inherit" to={url}>
+                {display}
+              </Button>
             ))}
           </Stack>
           <IconButton
