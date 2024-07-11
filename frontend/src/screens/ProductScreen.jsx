@@ -119,6 +119,7 @@ const ProductScreen = () => {
             <CardActions sx={{ p: 2 }}>
               <Button
                 variant="contained"
+                color="primary"
                 size="large"
                 fullWidth
                 disabled={isInStock ? false : true}

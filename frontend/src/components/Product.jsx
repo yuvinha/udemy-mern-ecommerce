@@ -21,7 +21,7 @@ const Product = ({ product }) => {
         <CardContent>
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h6"
             component="div"
             sx={{
               overflow: "hidden",

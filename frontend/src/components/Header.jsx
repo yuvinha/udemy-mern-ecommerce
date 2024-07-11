@@ -15,7 +15,7 @@ import {
   Drawer,
   IconButton,
 } from "@mui/material";
-import { Menu } from "@mui/icons-material";
+import { Storefront, Menu } from "@mui/icons-material";
 import logo from "../assets/logo.png";
 
 const drawerWidth = 240;
@@ -50,20 +50,20 @@ const Header = () => {
 
   return (
     <>
-      <AppBar component="nav" position="static">
+      <AppBar
+        component="nav"
+        position="static"
+        sx={{ boxShadow: "none", background: "none" }}
+      >
         <Toolbar>
           <Link
             component={RouterLink}
             to="/"
+            underline="none"
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
           >
-            <Box component="img" sx={{ height: 40 }} alt="Logo" src={logo} />
-            <Typography
-              variant="h6"
-              noWrap
-              to="/"
-              sx={{ color: "primary.contrastText" }}
-            >
+            <Storefront />
+            <Typography variant="h6" noWrap to="/" color="primary">
               Proshop
             </Typography>
           </Link>
@@ -75,7 +75,13 @@ const Header = () => {
             }}
           >
             {navItems.map(({ display, url }) => (
-              <Button component={RouterLink} key={url} color="inherit" to={url}>
+              <Button
+                component={RouterLink}
+                key={url}
+                color="inherit"
+                size="large"
+                to={url}
+              >
                 {display}
               </Button>
             ))}

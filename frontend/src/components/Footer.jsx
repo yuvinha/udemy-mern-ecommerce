@@ -9,6 +9,7 @@ const Footer = () => {
         display: "flex",
         justifyContent: "center",
         width: "100%",
+        py: 8,
       }}
     >
       <Stack direction="row" spacing={2}>
