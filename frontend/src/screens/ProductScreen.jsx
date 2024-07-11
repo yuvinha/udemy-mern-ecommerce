@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   Box,
@@ -13,11 +15,24 @@ import {
   CardActions,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
-import products from "../products";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const product = products.find((item) => item._id === productId);
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`, {
+        proxy: {
+          host: "localhost",
+          port: 3001,
+        },
+      });
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [productId]);
+
   const isInStock = product.countInStock > 0;
 
   return (

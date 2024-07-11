@@ -1,8 +1,25 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Grid, Typography } from "@mui/material";
 import Product from "../components/Product";
-import products from "../products";
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/products", {
+        proxy: {
+          host: "localhost",
+          port: 3001,
+        },
+      });
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <Typography component="h1" variant="h3" sx={{ my: 4 }}>
