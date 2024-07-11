@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import { Grid, Typography } from "@mui/material";
 import Product from "../components/Product";
 
@@ -8,12 +8,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get("/api/products", {
-        proxy: {
-          host: "localhost",
-          port: 3001,
-        },
-      });
+      const { data } = await axiosInstance.get("/api/products");
       setProducts(data);
     };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../axiosInstance";
 import {
   Button,
   Box,
@@ -22,12 +22,7 @@ const ProductScreen = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`, {
-        proxy: {
-          host: "localhost",
-          port: 3001,
-        },
-      });
+      const { data } = await axiosInstance.get(`/api/products/${productId}`);
       setProduct(data);
     };
     fetchProduct();
