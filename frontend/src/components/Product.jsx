@@ -27,7 +27,7 @@ const Product = ({ product }) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: "2",
+              WebkitLineClamp: "1",
               WebkitBoxOrient: "vertical",
             }}
           >
