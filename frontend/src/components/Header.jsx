@@ -2,30 +2,18 @@ import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar,
-  Button,
   Toolbar,
   Box,
   Stack,
   Typography,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Link,
   Drawer,
   IconButton,
 } from "@mui/material";
 import { Storefront, Menu } from "@mui/icons-material";
-import logo from "../assets/logo.png";
+import NavList from "./NavList";
 
 const drawerWidth = 240;
-const navItems = [
-  { display: "Cart", url: "cart" },
-  {
-    display: "Sign in",
-    url: "login",
-  },
-];
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -36,15 +24,7 @@ const Header = () => {
 
   const DrawerList = (
     <Box onClick={handleDrawerToggle}>
-      <List>
-        {navItems.map(({ display, url }) => (
-          <ListItem key={url} disablePadding>
-            <ListItemButton component={RouterLink} to={url}>
-              <ListItemText primary={display} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <NavList direction="column" />
     </Box>
   );
 
@@ -74,7 +54,8 @@ const Header = () => {
               display: { xs: "none", sm: "block" },
             }}
           >
-            {navItems.map(({ display, url }) => (
+            <NavList />
+            {/* {navItems.map(({ display, url }) => (
               <Button
                 component={RouterLink}
                 key={url}
@@ -84,7 +65,7 @@ const Header = () => {
               >
                 {display}
               </Button>
-            ))}
+            ))} */}
           </Stack>
           <IconButton
             color="inherit"

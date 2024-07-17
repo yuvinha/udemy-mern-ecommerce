@@ -1,5 +1,8 @@
-import { useParams, Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams, Link as RouterLink, useNavigate } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import { addToCart } from "../slices/cartSlice";
 import {
   Button,
   Box,
@@ -13,11 +16,18 @@ import {
   CardContent,
   CardActions,
   CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     data: product,
@@ -25,6 +35,16 @@ const ProductScreen = () => {
     isError,
     error,
   } = useGetProductDetailsQuery(productId);
+
+  // Qty input
+  const [qty, setQty] = useState(1);
+  const handleChange = (e) => setQty(e.target.value);
+
+  // Add To Cart Button
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
 
   if (isError) return <div>{error.data.message}</div>;
   if (isLoading)
@@ -119,7 +139,7 @@ const ProductScreen = () => {
             </ListItem>
           </List>
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} sx={{ width: "100%" }}>
           <Card variant="outlined">
             <CardContent>
               <List>
@@ -142,6 +162,43 @@ const ProductScreen = () => {
                     {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                   </Typography>
                 </ListItem>
+                {product.countInStock > 0 && (
+                  <ListItem alignItems="center">
+                    <FormControl
+                      fullWidth
+                      sx={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <InputLabel
+                        id="qty-label"
+                        shrink={false}
+                        sx={{
+                          position: "relative",
+                          top: "auto",
+                          left: "auto",
+                          transform: "none",
+                          flexGrow: 1,
+                          color: "text.primary",
+                        }}
+                      >
+                        Qty:
+                      </InputLabel>
+                      <Select
+                        labelId="qty-label"
+                        id="qty"
+                        value={qty}
+                        onChange={handleChange}
+                        size="small"
+                        sx={{ minWidth: 80 }}
+                      >
+                        {[...Array(product.countInStock).keys()].map((el) => (
+                          <MenuItem key={el + 1} value={el + 1}>
+                            {el + 1}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </ListItem>
+                )}
               </List>
             </CardContent>
             <CardActions sx={{ p: 2 }}>
@@ -151,6 +208,7 @@ const ProductScreen = () => {
                 size="large"
                 fullWidth
                 disabled={product.countInStock > 0 ? false : true}
+                onClick={addToCartHandler}
               >
                 Add To Cart
               </Button>
