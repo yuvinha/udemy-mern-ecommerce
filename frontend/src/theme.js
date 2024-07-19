@@ -61,10 +61,16 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
+          textTransform: "capitalize",
         },
         containedPrimary: {
           color: "#fff",
         },
+      },
+    },
+    MuiListItemButton: {
+      defaultProps: {
+        disableRipple: true,
       },
     },
   },

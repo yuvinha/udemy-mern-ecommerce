@@ -22,7 +22,7 @@ const NavList = ({ direction }) => {
         <ListItemButton component={RouterLink} to={"cart"}>
           <Badge
             badgeContent={cartItems.reduce((acc, item) => acc + item.qty, 0)}
-            color="secondary"
+            color="info"
           >
             <ListItemText primary="Cart" />
           </Badge>

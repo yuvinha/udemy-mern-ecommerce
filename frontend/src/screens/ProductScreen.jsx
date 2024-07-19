@@ -38,7 +38,7 @@ const ProductScreen = () => {
 
   // Qty input
   const [qty, setQty] = useState(1);
-  const handleChange = (e) => setQty(e.target.value);
+  const handleChange = (event) => setQty(event.target.value);
 
   // Add To Cart Button
   const addToCartHandler = () => {
