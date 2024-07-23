@@ -94,7 +94,7 @@ const RegisterScreen = () => {
       >
         <TextField
           type="text"
-          label="name"
+          label="Name"
           placeholder="Enter name"
           error={errors.name ? true : false}
           helperText={errors.name?.message}
