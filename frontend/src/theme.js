@@ -54,10 +54,12 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiButton: {
+    MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
       },
+    },
+    MuiButton: {
       styleOverrides: {
         root: {
           boxShadow: "none",
@@ -68,9 +70,11 @@ const theme = createTheme({
         },
       },
     },
-    MuiListItemButton: {
-      defaultProps: {
-        disableRipple: true,
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          padding: "12px 24px",
+        },
       },
     },
   },

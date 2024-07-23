@@ -5,12 +5,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CustomizedSnackbar from "./components/CustomizedSnackbar";
 
 const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <CustomizedSnackbar />
         <Header />
         <main>
           <Container>

@@ -33,7 +33,12 @@ const Header = () => {
       <AppBar
         component="nav"
         position="static"
-        sx={{ boxShadow: "none", background: "none" }}
+        sx={{
+          boxShadow: "none",
+          background: "none",
+          maxWidth: "1536px",
+          margin: "auto",
+        }}
       >
         <Toolbar>
           <Link
