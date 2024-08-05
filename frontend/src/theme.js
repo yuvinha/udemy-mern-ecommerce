@@ -77,6 +77,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiStepIcon: {
+      styleOverrides: {
+        text: {
+          fill: "#fff",
+        },
+      },
+    },
   },
 });
 

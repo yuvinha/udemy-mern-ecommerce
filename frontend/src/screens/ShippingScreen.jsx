@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { saveShippingAddress } from "../slices/cartSlice";
 import { Box, TextField, Typography, Button } from "@mui/material";
+import { saveShippingAddress } from "../slices/cartSlice";
+import OrderStepper from "../components/OrderStepper";
 
 const ShippingScreen = () => {
   const { shippingAddress } = useSelector((state) => state.cart);
@@ -19,8 +20,13 @@ const ShippingScreen = () => {
       country: shippingAddress?.country || "",
     },
   });
-  const { register: formRegister, control, handleSubmit, formState } = form;
-  const { errors } = formState;
+
+  const {
+    register: formRegister,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   const onSubmit = async (data) => {
     dispatch(saveShippingAddress(data));
@@ -29,6 +35,7 @@ const ShippingScreen = () => {
 
   return (
     <>
+      <OrderStepper activeStep={0} />
       <Typography component="h1" variant="h3" sx={{ my: 4 }} align="center">
         Shipping
       </Typography>
@@ -86,18 +93,16 @@ const ShippingScreen = () => {
             required: "Country is required",
           })}
         />
-        <Box sx={{ position: "relative" }}>
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            color="primary"
-            sx={{ py: 1.5 }}
-            fullWidth
-          >
-            Proceed to Payment
-          </Button>
-        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          color="primary"
+          sx={{ py: 1.5 }}
+          fullWidth
+        >
+          Proceed to Payment
+        </Button>
       </Box>
       {/* <DevTool control={control} /> */}
     </>
